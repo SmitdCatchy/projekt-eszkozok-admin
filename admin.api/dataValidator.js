@@ -10,11 +10,17 @@ module.exports = {
     },
 
     validateBan: function(data){
-        return new this.ReturnMessage(data.date > new Date(), "Ban date must be after this day!");
+        if(!data.hasOwnProperty("date")){
+            return new this.ReturnMessage(false, "Date is missing!");
+        }
+        else{
+            var today = new Date();
+            return new this.ReturnMessage(data.date > today, "Ban date must be after this day!");
+        }
     },
 
     validateWarn: function(data){
-        if(!data.message){
+        if(!data.hasOwnProperty("message")){
             return new this.ReturnMessage(false, "Warn message is missing!");
         }
         else{
@@ -23,9 +29,25 @@ module.exports = {
     },
 
     validateUserData: function(user){
-        //Email ellenorzes
-        var check = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+        var emailCheck = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
-        return check.test(user.email);
+        if(!user.hasOwnProperty("name")){
+            return new this.ReturnMessage(false, "User's name is missing!");
+        }
+        else if(!user.hasOwnProperty("email")){
+            return new this.ReturnMessage(false, "User's email is missing!");
+        }
+        else if(!emailCheck.test(user.email)){
+            return new this.ReturnMessage(false, "Invalid email!");
+        }
+        else if(!user.hasOwnProperty("password")){
+            return new this.ReturnMessage(false, "User's password is missing!");
+        }
+        else if(!user.hasOwnProperty("role")){
+            return new this.ReturnMessage(false, "User's role is missing!");
+        }
+        else{
+            return new this.ReturnMessage(true);
+        }
     }
 };

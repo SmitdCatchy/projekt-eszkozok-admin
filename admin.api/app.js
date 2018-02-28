@@ -121,7 +121,7 @@ app.get("/api/users", function(req, res){
     });
 });
 
-app.get("/api/user", function(req, res){
+app.post("/api/user", function(req, res){
     Database.DatabaseMethods.User.getUserById(req.body, function(DatabaseAnswer){
         res.send(DatabaseAnswer);
     });
@@ -168,7 +168,7 @@ app.post("/api/edit", function(req, res){
             });
         }
         else{
-            res.redirect("/login");
+            res.send({result: null, error: "Moderator cannot edit the user's data!"});
         }
     });
 });
