@@ -1,0 +1,86 @@
+#header{
+  position: fixed;
+  top: 0;
+  height: 80px;
+  line-height: 80px;
+  width: 100%;
+  background-color: #000;
+  transition: height 0.5s;
+  z-index: 9000;
+  box-shadow: 0 0 10px 0 #000;
+}
+#header-small{
+  position: fixed;
+  top: 0;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  background-color: #000;
+  transition: height 0.5s;
+  z-index: 9000;
+  box-shadow: 0 0 10px 0 #000;
+}
+#header-resp{
+  position: fixed;
+  top: 0;
+  height: 40px;
+  line-height: 40px;
+  background-color: #000;
+  transition: height 0.5s;
+  z-index: 9000;
+  width: 100%;
+  box-shadow: 0 0 10px 0 #000;
+}
+#header-width{
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+  width: 100%;
+}
+
+@media (min-width: 720px) { #header-width{ width: 640px; } }
+@media (min-width: 1000px) { #header-width{ width: 920px; } }
+@media (min-width: 1200px) { #header-width{ width: 1140px; } }
+
+#header-image{
+  height: 80px;
+  width: 80px;
+  background-image: url("../../../media/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  float: left;
+  transition: height 0.3s, width 0.3s, display 0.3s;
+  margin-right: 20px;
+}
+#header-image-wide{
+  height: 40px;
+  width: 180px;
+  background-image: url("../../../media/images/logo_text.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  float: left;
+  transition: height 0.3s, width 0.3s, display 0.3s;
+}
+#header-resp #header-image-wide{
+  height: 40px;
+  width: 240px;
+  background-image: url("../../../media/images/logo_text.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+}
+#navigation{
+  float: right;
+}
+.disabled{
+  display:none;
+}

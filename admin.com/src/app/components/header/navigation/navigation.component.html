@@ -1,0 +1,17 @@
+<ul>
+  <a *ngIf="'GUEST' !== 'GUEST'" routerLink="list" routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+    <li class="">
+      <div>Users</div>
+    </li>
+  </a>
+  <a *ngIf="'GUEST' === 'GUEST'" routerLink="" routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+    <li class="">
+      <div >Log in</div>
+    </li>
+  </a>
+  <a *ngIf="'GUEST' !== 'GUEST'" (click)="logout()">
+    <li class="">
+      <div >Logout</div>
+    </li>
+  </a>
+</ul>

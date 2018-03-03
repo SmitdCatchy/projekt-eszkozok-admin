@@ -1,3 +1,7 @@
-<h1>HEADER component</h1>
-<router-outlet></router-outlet>
-<h1>FOOTER component</h1>
+<div id="container" [style.min-height.px]="container_min_height">
+  <div id="inner-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<app-footer></app-footer>
+<app-header></app-header>

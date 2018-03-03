@@ -6,12 +6,12 @@ import { UserComponent } from './pages/user/user.component';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  { path: '',  component: ListComponent },
+  { path: '',  component: LoginComponent },
 
   { path: 'user',  component: UserComponent },
   { path: 'user/:name',  component: UserComponent },
 
-  { path: 'login',     component: LoginComponent },
+  { path: 'list',     component: ListComponent },
 
   { path: '**',     redirectTo: '', pathMatch: 'full' }
   // { path: '**',     redirectTo: 'error', pathMatch: 'full' }
