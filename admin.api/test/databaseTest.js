@@ -7,12 +7,26 @@ var chai = require("chai"),
     Database = require("../database");
 
 before(function(done){
-    Database.DatabaseMethods.User.removeUser({email: '__test@test.com'}, function(){done()});
+    Database.DatabaseMethods.User.removeUser({email: '__test@test.com'}, function(){
+        Database.DatabaseMethods.User.removeUser({email: '__test2@test.com'}, function(){
+            Database.DatabaseMethods.User.removeUser({email: '__test3@test.com'}, function(){done()});
+        });
+    });
 });
 
 describe("---- Creating user 1 ----", function() {
     it("A user with the following attributes should be created - {name: '__test', email: '__test@test.com', password: '__test', role: 'admin'}", function(done) {
         Database.DatabaseMethods.User.addUser({name: '__test', email: '__test@test.com', password: '__test', role: 'admin'}, function(DatabaseAnswer){
+            console.log(DatabaseAnswer.result);
+            expect(DatabaseAnswer.result).to.not.be.null;
+            done();
+        });
+    });
+});
+
+describe("---- Creating user 2 ----", function() {
+    it("A user with the following attributes should be created - {name: '__test2', email: '__test2@test.com', password: '__test2', role: 'user'}", function(done) {
+        Database.DatabaseMethods.User.addUser({name: '__test2', email: '__test2@test.com', password: '__test2', role: 'user'}, function(DatabaseAnswer){
             console.log(DatabaseAnswer.result);
             expect(DatabaseAnswer.result).to.not.be.null;
             done();
@@ -50,7 +64,7 @@ describe("---- User is admin ----", function() {
 
 describe("---- Ban user ----", function() {
     it("The user should have a ban date and the flags should be cleared.", function(done) {
-        Database.DatabaseMethods.User.getUserByEmail({email: '__test@test.com'}, function(DatabaseAnswer){
+        Database.DatabaseMethods.User.getUserByEmail({email: '__test2@test.com'}, function(DatabaseAnswer){
             var today = new Date(),
                 tomorrow = today.setDate(today.getDate() + 1);
 
@@ -65,7 +79,7 @@ describe("---- Ban user ----", function() {
 
 describe("---- Warn user ----", function() {
     it("The user should have a warning.", function(done) {
-        Database.DatabaseMethods.User.getUserByEmail({email: '__test@test.com'}, function(DatabaseAnswer){
+        Database.DatabaseMethods.User.getUserByEmail({email: '__test2@test.com'}, function(DatabaseAnswer){
 
             Database.DatabaseMethods.User.warnUser({_id: DatabaseAnswer.result._id, message: "Test warning!"}, function(DatabaseAnswer){
                 console.log(DatabaseAnswer.result);
@@ -78,7 +92,7 @@ describe("---- Warn user ----", function() {
 
 describe("---- Edit user ----", function() {
     it("The user should have a different name and password.", function(done) {
-        Database.DatabaseMethods.User.getUserByEmail({email: '__test@test.com'}, function(DatabaseAnswer){
+        Database.DatabaseMethods.User.getUserByEmail({email: '__test2@test.com'}, function(DatabaseAnswer){
             console.log("Old user: " + DatabaseAnswer.result);
 
             DatabaseAnswer.result.name = "__NewTest";
@@ -102,9 +116,18 @@ describe("---- Remove user 1 ----", function() {
     });
 });
 
-describe("---- Creating user 2 ----", function() {
-    it("User should not be created with invalid role (possible values: admin, moderator, user) - {name: '__test2', email: '__test2@test.com', password: '__test2', role: 'alma'}", function(done) {
-        Database.DatabaseMethods.User.addUser({name: '__test2', email: '__test2@test.com', password: '__test2', role: 'alma'}, function(DatabaseAnswer){
+describe("---- Remove user 2 ----", function() {
+    it("A user with the following attributes should be removed - {email: '__test2@test.com'}", function(done) {
+        Database.DatabaseMethods.User.removeUser({email: '__test2@test.com'}, function(DatabaseAnswer){
+            expect(DatabaseAnswer.result).to.be.true;
+            done();
+        });
+    });
+});
+
+describe("---- Creating user 3 ----", function() {
+    it("User should not be created with invalid role (possible values: admin, moderator, user) - {name: '__test3', email: '__test3@test.com', password: '__test3', role: 'alma'}", function(done) {
+        Database.DatabaseMethods.User.addUser({name: '__test3', email: '__test3@test.com', password: '__test3', role: 'alma'}, function(DatabaseAnswer){
             expect(DatabaseAnswer.result).to.be.null;
             done();
         });

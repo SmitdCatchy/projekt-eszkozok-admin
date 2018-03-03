@@ -22,7 +22,8 @@ module.exports = {
                     //Nem megfelelo a nev/jelszo
                     else{
                         //res.redirect("/login");
-                        res.send({error: "Email or password is not correct!"});
+                        //res.send({error: "Email or password is not correct!"});
+                        res.redirect(401, "/login");
                     }
                 }
                 else{
@@ -37,12 +38,14 @@ module.exports = {
                                     res.redirect("/");
                                 }
                                 else{
-                                    res.send({error: "You are banned, until " + DatabaseAnswer.result.end});
+                                    //res.send({error: "You are banned, until " + DatabaseAnswer.result.end});
+                                    res.redirect(403, "/login");
                                 }
                             }
                             else{
                                 //res.redirect("/login");
-                                res.send({error: DatabaseAnswer.error});
+                                //res.send({error: DatabaseAnswer.error});
+                                res.redirect(409, "/login");
                             }
                         });
                     }

@@ -185,7 +185,8 @@ var DatabaseMethods = {
                     callback(new Helpers.DatabaseAnswer(null, error));
                 }
                 else{
-                    callback(new Helpers.DatabaseAnswer({isBanned: foundUser && foundUser.ban !== null, end: foundUser.ban}));
+                    var today = new Date();
+                    callback(new Helpers.DatabaseAnswer({isBanned: (foundUser && foundUser.ban !== null && today < foundUser.ban), end: foundUser.ban}));
                 }
             });
         },
@@ -260,25 +261,31 @@ var DatabaseMethods = {
                 }
                 else{
                     if(foundUser){
-                        foundUser.ban = data.date;
-
-                        //Toroljuk az esetleges flag -eket
-                        for(var key in foundUser.flags){
-                            if(foundUser.flag.hasOwnProperty(key)) {
-                                foundUser.flag[key].value = false;
-                                foundUser.flag[key].byWho = [];
-                            }
+                        //Admin -t nem lehet bannolni
+                        if(foundUser.role === Constants.Roles.ADMIN){
+                            callback(new Helpers.DatabaseAnswer(null, "You cannot ban an admin!"));
                         }
+                        else{
+                            foundUser.ban = data.date;
 
-                        foundUser.save(function(error, updatedUser){
-                            if(error){
-                                console.log(error);
-                                callback(new Helpers.DatabaseAnswer(null, error));
+                            //Toroljuk az esetleges flag -eket
+                            for(var key in foundUser.flags){
+                                if(foundUser.flag.hasOwnProperty(key)) {
+                                    foundUser.flag[key].value = false;
+                                    foundUser.flag[key].byWho = [];
+                                }
                             }
-                            else{
-                                callback(new Helpers.DatabaseAnswer(updatedUser));
-                            }
-                        });
+
+                            foundUser.save(function(error, updatedUser){
+                                if(error){
+                                    console.log(error);
+                                    callback(new Helpers.DatabaseAnswer(null, error));
+                                }
+                                else{
+                                    callback(new Helpers.DatabaseAnswer(updatedUser));
+                                }
+                            });
+                        }
                     }
                     else{
                         callback(new Helpers.DatabaseAnswer(null, "User cannot be found!"));
@@ -295,7 +302,6 @@ var DatabaseMethods = {
                 }
                 else{
                     if(foundUser){
-                        console.log({message: data.message});
                         foundUser.warn.push({message: data.message});
 
                         foundUser.save(function(error, updatedUser){
@@ -343,12 +349,6 @@ var DatabaseMethods = {
                     }
                 }
             });
-        },
-
-        removeFlag: function(data, callback){
-
-            //TODO
-
         }
     },
 
@@ -363,6 +363,35 @@ var DatabaseMethods = {
         }
     }
 };
+
+
+
+/*  Ha esetleg kene meg manualis felvetelre
+var setToxic = function(){
+    Models.Users.findOne({_id: "5a96abb58517f93be8dcb503"}, function(error, foundUser){
+        if(error){
+            console.log(error);
+        }
+        else{
+            if(foundUser){
+                foundUser.flag.toxic.value = true;
+                foundUser.flag.toxic.byWho.push({_id: "5a96abb58517f93be8dcb505"});
+
+                foundUser.save(function(error, updatedUser){
+                    if(error){
+                        console.log(error);
+                    }
+                    else{
+                        console.log(updatedUser);
+                    }
+                });
+            }
+            else{
+            }
+        }
+    });
+};
+*/
 
 
 
