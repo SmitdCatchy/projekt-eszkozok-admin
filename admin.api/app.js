@@ -64,7 +64,7 @@ app.use(cookieParser(Settings.secret));
 app.use(sessionMiddleware);
 
 //Elerhetove tesszuk az alkalmazast
-app.use(express.static(path.resolve(__dirname + "/../api.com")));
+app.use(express.static(path.resolve(__dirname + "/../admin.com")));
 
 
 
@@ -75,7 +75,7 @@ app.use(express.static(path.resolve(__dirname + "/../api.com")));
 //-------------------- Publikus --------------------
 //--------------------------------------------------
 app.get("/", function(req, res){
-    res.sendFile(path.resolve(__dirname + "/../api.com/src/index.html"));
+    res.sendFile(path.resolve(__dirname + "/../admin.com/src/index.html"));
 });
 
 app.post("/api/login", function(req, res){
