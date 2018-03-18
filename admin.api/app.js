@@ -92,7 +92,7 @@ app.post("/api/login", function(req, res){
 
 app.post("/api/logout", function(req, res){
     AccessControl.logout(req, res);
-    res.redirect("/login");
+    res.redirect("/");
 });
 
 
@@ -108,7 +108,7 @@ function isLoggedIn(req, res, next){
             next();
         }
         else{
-            res.redirect("/login");
+            res.status(300).send({redirect: "/login"});
         }
     });
 }
