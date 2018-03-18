@@ -245,7 +245,7 @@ describe("---- Testing routes as admin ----", function() {
             .post("/api/logout")
             .send(adminUser)
             .end(function(err, response){
-                expect(response.header.location).to.equal("/login");
+                expect(response.header.location).to.equal("/");
                 done();
             });
     });
@@ -255,7 +255,7 @@ describe("---- Testing routes as admin ----", function() {
             .post("/api/login")
             .send(moderatorUser1)
             .end(function(err, response){
-                expect(response.header.location).to.equal("/login");
+                expect(response.statusCode).to.equal(403);
                 done();
             });
     });
@@ -288,7 +288,7 @@ describe("---- Testing routes as admin ----", function() {
             .post("/api/logout")
             .send(adminUser)
             .end(function(err, response){
-                expect(response.header.location).to.equal("/login");
+                expect(response.header.location).to.equal("/");
                 done();
             });
     });
