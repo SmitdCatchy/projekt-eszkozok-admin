@@ -1,0 +1,53 @@
+:host{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.usertag{
+  width: 125px;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 25px;
+  background:  linear-gradient(rgba(30,30,30,0.5),rgba(60,60,60,0.5),rgba(40,40,40,0.5),rgba(30,30,30,0.75));
+  margin: 20px;
+  box-shadow: 0 0 10px 5px rgba(0,0,0,1);
+  transition: all 0.25s;
+}
+.username{
+  font-size: 20px;
+  line-height: 20px;
+  margin: 10px;
+  width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.username.admin{
+  color: #0F0;
+}
+.username.moderator{
+  color: #0FF;
+}
+.flag.true{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background:  linear-gradient(rgba(200,20,20,0.5),rgba(255,0,0,0.75),rgba(200,0,0,0.75),rgba(150,20,20,0.5));
+  box-shadow: 0 0 10px 2px rgba(255,0,0,0.5);
+}
+.flag.false{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background:  linear-gradient(rgba(20,200,20,0.5),rgba(0,255,0,0.75),rgba(0,200,0,0.75),rgba(20,150,20,0.5));
+  box-shadow: 0 0 10px 2px rgba(0,255,0,0.5);
+}
+.flag.warned{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background:  linear-gradient(rgba(200,150,20,0.5),rgba(255,200,0,0.75),rgba(200,150,0,0.75),rgba(150,100,20,0.5));
+  box-shadow: 0 0 10px 2px rgba(255,200,0,0.5);
+}
