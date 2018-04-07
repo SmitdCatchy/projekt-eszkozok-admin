@@ -62,7 +62,7 @@ export class ListComponent implements OnInit {
         }
       ],
       warn: "",
-      ban: null
+      ban: true
     },
     {
       name: "David",

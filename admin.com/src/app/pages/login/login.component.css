@@ -1,0 +1,116 @@
+:host{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+a{
+  color: #555;
+  text-decoration: none;
+  margin: 10px;
+
+  transition: color 0.2s;
+
+  &:hover{
+    color: #FFF;
+  }
+}
+h1{
+  width: 100%;
+  text-align: center;
+  margin: 10px;
+}
+form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+input{
+  font-family: CGB;
+  font-size: 120%;
+  color: #FFF;
+  width: 60%;
+  max-width: 360px;
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgb(50,50,50);
+  border: 5px solid rgba(50,50,50,1);
+  margin: 10px 20%;
+
+  &:focus{
+      background-color: rgb(0,0,0);
+      outline: none;
+    }
+}
+button{
+  font-family: CGB;
+  font-size: 120%;
+  color: #FFF;
+  width: 62%;
+  max-width: 370px;
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgb(30,30,30);
+  border: 5px solid rgba(30,30,30,1);
+  margin: 10px 20%;
+
+  transition: background 0.2s, border 0.2s, color 0.2s;
+
+  &:focus{
+    outline: none;
+    background-color: #333;
+    border: 5px solid #333;
+  }
+  &:hover{
+    background-color: #333;
+    border: 5px solid #333;
+  }
+  &:active{
+    color: #999;
+    background-color: #111;
+    border: 5px solid #111;
+  }
+}
+button:disabled{
+  color: #999;
+  background-color: #111;
+  border: 5px solid #111;
+  cursor: not-allowed;
+}
+.error{
+  margin-top: 10px;
+  font-family: CGB;
+  color: rgb(200,0,0);
+}
+.himg{
+  width: 60%;
+  height: calc(60%*112/552);
+  max-width: 370px;
+  max-height: 75px;
+}
+//SEPARATOR
+  .separator{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .separator/*.class*/ div{
+    border: 1px solid #333;
+    margin: 10px;
+    // the last subtracted value is the textbox's half width
+    width: calc(30% - 15px - 12px);
+    max-width: calc(172px - 12px);
+  }
+  .separator.graph div{
+    border: 1px solid #333;
+    margin: 10px;
+    // the last subtracted value is the textbox's half width
+    width: calc(30% - 15px - 28px);
+    max-width: calc(172px - 28px);
+  }

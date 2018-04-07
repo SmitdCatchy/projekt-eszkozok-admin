@@ -1,4 +1,9 @@
-<div *ngFor="let user of dummydata" class="usertag">
+<div *ngFor="let user of dummydata" class="usertag" routerLink="/user/{{user.name}}">
   <h2 class="username {{user.role}}">{{user.name}}</h2>
-  <div class="flag {{user.flagged}}" [ngClass]="{warned : user.warn !== ''}"></div>
+  <div class="flag {{user.flagged}}"
+    [ngClass]="{
+      warned : user.warn !== '',
+      banned : user.ban !== null
+    }"
+  ></div>
 </div>
