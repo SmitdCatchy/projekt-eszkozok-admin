@@ -108,7 +108,7 @@ function isLoggedIn(req, res, next){
             next();
         }
         else{
-            res.status(300).send({redirect: "/login"});
+            res/*.status(300)*/.send({redirect: "/login", reason: "You need to log in!"});
         }
     });
 }

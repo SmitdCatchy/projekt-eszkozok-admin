@@ -23,7 +23,7 @@ module.exports = {
                     else{
                         //res.redirect("/login");
                         //res.send({error: "Email or password is not correct!"});
-                        res/*.status(401)*/.send({redirect: "/login"});
+                        res/*.status(401)*/.send({redirect: "/login", reason: "Email or password is not correct!"});
                     }
                 }
                 else{
@@ -39,13 +39,13 @@ module.exports = {
                                 }
                                 else{
                                     //res.send({error: "You are banned, until " + DatabaseAnswer.result.end});
-                                    res/*.status(403)*/.send({redirect: "/login"});
+                                    res/*.status(403)*/.send({redirect: "/login", reason: "You are banned, until " + DatabaseAnswer.result.end});
                                 }
                             }
                             else{
                                 //res.redirect("/login");
                                 //res.send({error: DatabaseAnswer.error});
-                                res/*.status(409)*/.send({redirect: "/login"});
+                                res/*.status(409)*/.send({redirect: "/login", reason: "An error occurred: " + DatabaseAnswer.error});
                             }
                         });
                     }
