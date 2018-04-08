@@ -255,7 +255,8 @@ describe("---- Testing routes as admin ----", function() {
             .post("/api/login")
             .send(moderatorUser1)
             .end(function(err, response){
-                expect(response.statusCode).to.equal(403);
+                //expect(response.statusCode).to.equal(403);
+                expect(response.body.redirect).to.equal("/login");
                 done();
             });
     });
