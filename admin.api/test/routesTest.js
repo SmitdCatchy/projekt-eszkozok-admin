@@ -69,8 +69,8 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
-                expect(response.body.result).to.not.be.null;
+                expect(response.body.redirect).to.be.undefined;
+                expect(response.body.result).to.not.be.undefined;
                 done();
             });
     });
@@ -82,8 +82,8 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
-                expect(response.body.result).to.not.be.null;
+                expect(response.body.redirect).to.be.undefined;
+                expect(response.body.result).to.not.be.undefined;
                 done();
             });
     });
@@ -95,8 +95,8 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
-                expect(response.body.result).to.not.be.null;
+                expect(response.body.redirect).to.be.undefined;
+                expect(response.body.result).to.not.be.undefined;
                 done();
             });
     });
@@ -111,7 +111,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -127,8 +127,8 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
-                expect(response.body.result).to.not.be.null;
+                expect(response.body.redirect).to.be.undefined;
+                expect(response.body.result).to.not.be.undefined;
                 done();
             });
     });
@@ -140,7 +140,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -153,8 +153,8 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
-                expect(response.body.result).to.not.be.null;
+                expect(response.body.redirect).to.be.undefined;
+                expect(response.body.result).to.not.be.undefined;
                 expect(response.body.result.warn.length).to.equal(1);
                 done();
             });
@@ -167,7 +167,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -180,7 +180,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -193,7 +193,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -206,7 +206,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -219,7 +219,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
@@ -232,8 +232,8 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
-                expect(response.body.result).to.not.be.null;
+                expect(response.body.redirect).to.be.undefined;
+                expect(response.body.result).to.not.be.undefined;
                 expect(response.body.result.name).to.equal("__normalUser1.2");
                 expect(response.body.result.role).to.equal("moderator");
                 done();
@@ -278,7 +278,7 @@ describe("---- Testing routes as admin ----", function() {
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
-                expect(response.header.location).to.not.equal("/login");
+                expect(response.body.redirect).to.be.undefined;
                 expect(response.body.result).to.be.null;
                 done();
             });
