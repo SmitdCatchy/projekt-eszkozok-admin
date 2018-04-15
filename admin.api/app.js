@@ -66,6 +66,13 @@ app.use(sessionMiddleware);
 //Elerhetove tesszuk az alkalmazast
 app.use(express.static(path.resolve(__dirname + "/../admin.com")));
 
+//CORS sutik kezelesere
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 
 
 //-----------------------------------------------------------------------------
