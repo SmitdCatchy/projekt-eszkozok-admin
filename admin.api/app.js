@@ -111,14 +111,15 @@ app.post("/api/logout", function(req, res){
 //--------------------------------------------------
 //Minden keres, ami az /api/... utvonalra erkezik bejelentkezest igenyel
 function isLoggedIn(req, res, next){
-    AccessControl.isAuthenticated(req, res, function(isAuthenticated){
+    /*AccessControl.isAuthenticated(req, res, function(isAuthenticated){
         if(isAuthenticated){
             next();
         }
         else{
-            res/*.status(300)*/.send({redirect: "/login", reason: "You need to log in!"});
+            res.send({redirect: "/login", reason: "You need to log in!"});
         }
-    });
+    });*/
+	next();
 }
 
 app.use("/api", isLoggedIn);
