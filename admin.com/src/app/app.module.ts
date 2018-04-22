@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app.routing';
 
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ListComponent } from './pages/list/list.component';
@@ -30,7 +32,8 @@ import { DropdownmenuComponent } from './components/header/dropdownmenu/dropdown
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DateValueAccessorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

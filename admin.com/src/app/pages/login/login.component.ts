@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../models/User";
+// import {User} from "../../models/User";
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserService} from "../../services/user.service";
+// import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor(private userService: UserService, private router: Router) {  }
+  constructor(/*private userService: UserService,*/ private router: Router) {  }
 
   ngOnInit() {
     // if(this.userService.user.role !== "GUEST") this.router.navigate(['/']);

@@ -13,25 +13,21 @@ export class ListComponent implements OnInit {
     {
       name: "Andor",
       email: "a@a.a",
-      password: "hashed",
       role: "admin",
       flagged: false,
-      flags: [
-        {
-          toxic: {
-              value: false,
-              num: 0,
-              byWho: []
-          }
+      flags: {
+        toxic: {
+            value: false,
+            num: 0,
+            byWho: []
         }
-      ],
+      },
       warn: "",
       ban: null
     },
     {
       name: "Baltazar",
       email: "b@b.b",
-      password: "hbshed",
       role: "user",
       flagged: true,
       flags: [
@@ -49,7 +45,6 @@ export class ListComponent implements OnInit {
     {
       name: "Catchy",
       email: "c@c.c",
-      password: "hbshed",
       role: "user",
       flagged: false,
       flags: [
@@ -67,7 +62,6 @@ export class ListComponent implements OnInit {
     {
       name: "David",
       email: "d@d.cd",
-      password: "hbshed",
       role: "moderator",
       flagged: true,
       flags: [

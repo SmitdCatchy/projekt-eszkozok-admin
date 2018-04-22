@@ -1,3 +1,75 @@
-<p>
-  user works!
-</p>
+<h1>{{userData.name}}</h1>
+
+<input type="text" maxlength="20" placeholder="Username" [(ngModel)]="userData.name"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+  "><!-- a 2. userData.role a moderator jogosultsagat kell majd hogy nezze -> modertor moderatort nem modosithat-->
+<input type="text" maxlength="100" placeholder="Email" [(ngModel)]="userData.email"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+  ">
+<input type="text" maxlength="10" placeholder="Role" [(ngModel)]="userData.role"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+  ">
+  <button type="button" class="btn btn-default" (click)="submit()"
+    [disabled]="
+      userData.role === 'admin' ||
+      userData.role === 'moderator' && userData.role == 'moderator'
+  ">Submit</button>
+  <div class="separator flags">
+      <div></div><p >FLAGS</p><div></div>
+  </div>
+<h2>Toxic</h2>
+<div class="flaggers">
+  <p *ngFor="let u of userData.flags.toxic.byWho">{{u}}</p>
+</div>
+
+<button type="button" class="btn btn-default" (click)="submit()"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+">Clear</button>
+
+<div class="separator">
+    <div></div><p >ban</p><div></div>
+</div>
+
+<textarea  maxlength="2000" placeholder="Warn" [(ngModel)]="userData.warn"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+"></textarea>
+
+<input type="date" name="" [(ngModel)]="userData.ban"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+" useValueAsDate>
+
+<button type="button" class="btn btn-default" (click)="submit()"
+  [disabled]="
+    userData.role === 'admin' ||
+    userData.role === 'moderator' && userData.role == 'moderator'
+">Submit</button>
+
+
+<!--
+userData = {
+  name: "Andor",
+  email: "a@a.a",
+  role: "admin",
+  flagged: false,
+  flags: {
+    toxic: {
+        value: false,
+        num: 0,
+        byWho: []
+    }
+  },
+  warn: "",
+  ban: null
+}; -->
