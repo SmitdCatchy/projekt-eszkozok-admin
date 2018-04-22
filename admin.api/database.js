@@ -152,7 +152,7 @@ var DatabaseMethods = {
                     if(result){
                         var session = JSON.parse(result.session);
 
-                        if(session.email === request.session.email && session.key === request.session.key){
+                        if(session.email === request.session.email && session.key === request.session.key && session.ip === request.session.ip){
                             callback(new Helpers.DatabaseAnswer(true));
                         }
                         else{
@@ -216,7 +216,7 @@ var DatabaseMethods = {
                 }
                 else{
                     if(foundUser){
-                        callback(new Helpers.DatabaseAnswer(foundUser));
+                        callback(new Helpers.DatabaseAnswer(Helpers.removePassword(foundUser)));
                     }
                     else{
                         callback(new Helpers.DatabaseAnswer(null, "User cannot be found!"));
@@ -233,7 +233,7 @@ var DatabaseMethods = {
                 }
                 else{
                     if(foundUser){
-                        callback(new Helpers.DatabaseAnswer(foundUser));
+                        callback(new Helpers.DatabaseAnswer(Helpers.removePassword(foundUser)));
                     }
                     else{
                         callback(new Helpers.DatabaseAnswer(null, "User cannot be found!"));
@@ -248,7 +248,7 @@ var DatabaseMethods = {
                     callback(new Helpers.DatabaseAnswer(null, error));
                 }
                 else {
-                    callback(new Helpers.DatabaseAnswer(users));
+                    callback(new Helpers.DatabaseAnswer(Helpers.removePasswords(users)));
                 }
             });
         },
@@ -329,10 +329,18 @@ var DatabaseMethods = {
                 }
                 else{
                     if(foundUser){
-                        foundUser.name = newUserData.name;
-                        foundUser.email = newUserData.email;
-                        foundUser.password = newUserData.password;
-                        foundUser.role = newUserData.role;
+                        if(newUserData.hasOwnProperty("name")){
+                            foundUser.name = newUserData.name;
+                        }
+                        if(newUserData.hasOwnProperty("email")){
+                            foundUser.email = newUserData.email;
+                        }
+                        if(newUserData.hasOwnProperty("password")){
+                            foundUser.password = newUserData.password;
+                        }
+                        if(newUserData.hasOwnProperty("role")){
+                            foundUser.role = newUserData.role;
+                        }
 
                         foundUser.save(function(error, updatedUser){
                             if(error){
@@ -363,7 +371,6 @@ var DatabaseMethods = {
         }
     }
 };
-
 
 
 /*  Ha esetleg kene meg manualis felvetelre
@@ -402,6 +409,19 @@ var Helpers = {
     DatabaseAnswer: function(result, error){
         this.result = result;
         this.error = error;
+    },
+
+    removePassword: function(user){
+        user.password = null;
+        return user;
+    },
+
+    removePasswords: function(users){
+        for(var i=0; i<users.length; ++i){
+            users[i].password = null;
+        }
+
+        return users;
     }
 };
 

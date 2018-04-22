@@ -163,7 +163,7 @@ describe("---- Testing routes as admin ----", function() {
     it("POST - /api/edit - Should fail to missing name.", function(done) {
         loggedInUser
             .post("/api/edit")
-            .send({_id: normalUser1._id, /*name: "__normalUser1",*/ email: "__normalUser1@normalUser.com", password: "__normalUser1", role: "user"})
+            .send({_id: normalUser1._id, name: "", email: "__normalUser1@normalUser.com", password: "__normalUser1", role: "user"})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
@@ -176,7 +176,7 @@ describe("---- Testing routes as admin ----", function() {
     it("POST - /api/edit - Should fail to missing email.", function(done) {
         loggedInUser
             .post("/api/edit")
-            .send({_id: normalUser1._id, name: "__normalUser1", /*email: "__normalUser1@normalUser.com",*/ password: "__normalUser1", role: "user"})
+            .send({_id: normalUser1._id, name: "__normalUser1", email: "", password: "__normalUser1", role: "user"})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
@@ -202,7 +202,7 @@ describe("---- Testing routes as admin ----", function() {
     it("POST - /api/edit - Should fail to missing password.", function(done) {
         loggedInUser
             .post("/api/edit")
-            .send({_id: normalUser1._id, name: "__normalUser1", email: "__normalUser1@normalUser.com", /*password: "__normalUser1",*/ role: "user"})
+            .send({_id: normalUser1._id, name: "__normalUser1", email: "__normalUser1@normalUser.com", password: "", role: "user"})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
@@ -215,7 +215,7 @@ describe("---- Testing routes as admin ----", function() {
     it("POST - /api/edit - Should fail to missing role.", function(done) {
         loggedInUser
             .post("/api/edit")
-            .send({_id: normalUser1._id, name: "__normalUser1", email: "__normalUser1@normalUser.com", password: "__normalUser1"/*, role: "user"*/})
+            .send({_id: normalUser1._id, name: "__normalUser1", email: "__normalUser1@normalUser.com", password: "__normalUser1", role: ""})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){

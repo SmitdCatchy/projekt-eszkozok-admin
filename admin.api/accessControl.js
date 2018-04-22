@@ -52,6 +52,7 @@ module.exports = {
                     else{
                         req.session.email = data.email;
                         req.session.key = Helpers.Functions.keyGenerator();
+                        req.session.ip = req.ip;
 
                         res.redirect("/");
                     }
