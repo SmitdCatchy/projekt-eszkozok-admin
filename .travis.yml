@@ -9,6 +9,7 @@ matrix:
         - cd admin.api
         - rm -r node_modules
       before_script:
-        - mongod --dbpath ../admin.db
+        - cd..
+        - mongod --dbpath /admin.db
       script: 
         - npm test
