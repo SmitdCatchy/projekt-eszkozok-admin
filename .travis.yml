@@ -6,11 +6,8 @@ matrix:
       services:
         - mongodb
       before_install:
+        - mongod --dbpath admin.db
         - cd admin.api
         - rm -r node_modules
-      before_script:
-        - cd ..
-        - sudo service mongod stop
-        - mongod --dbpath admin.db
       script: 
         - npm test
