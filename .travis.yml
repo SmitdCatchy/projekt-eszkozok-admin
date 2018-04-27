@@ -12,8 +12,8 @@ matrix:
         - cd admin.api
         - rm -r node_modules
       before_script:
-          - echo "dbPath = admin.db" | sudo tee -a /etc/mongodb.conf
-          - sudo service mongodb restart
-          - sleep 20
+        - echo "dbPath = admin.db" | sudo tee -a /etc/mongodb.conf
+        - sudo service mongod restart
+        - sleep 20
       script: 
         - npm test
