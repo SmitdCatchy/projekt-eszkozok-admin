@@ -5,9 +5,10 @@ matrix:
         - "8.9.4"
       services:
         - mongodb
-      before_install:
-        - sudo service mongod stop
+      install:
+        - cd ..
         - mongod --dbpath admin.db
+      before_install:
         - cd admin.api
         - rm -r node_modules
       script: 
