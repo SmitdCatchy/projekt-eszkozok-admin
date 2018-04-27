@@ -5,6 +5,7 @@ matrix:
         - "8.9.4"
       before_install:
         - cd admin.api
+        - chmod 0777 ./node_modules/.bin/mocha
       install:
         - npm install
       script: 
