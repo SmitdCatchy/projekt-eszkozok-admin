@@ -8,10 +8,6 @@ matrix:
           - MONGODB_VERSION=3.0.15
       services:
         - mongodb
-      install:
-        - cd ..
-        - sudo service mongod stop
-        - mongod --dbpath admin.db
       before_install:
         - cd admin.api
         - rm -r node_modules
