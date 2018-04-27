@@ -3,6 +3,9 @@ matrix:
     - language: node_js
       node_js:
         - "8.9.4"
+      env:
+        global:
+          - MONGODB_VERSION=3.0.15
       services:
         - mongodb
       install:
@@ -12,5 +15,9 @@ matrix:
       before_install:
         - cd admin.api
         - rm -r node_modules
+      before_script:
+          - echo "dbPath = admin.db" | sudo tee -a /etc/mongodb.conf
+          - sudo service mongodb restart
+          - sleep 20
       script: 
         - npm test
