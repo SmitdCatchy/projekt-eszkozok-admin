@@ -10,6 +10,7 @@ matrix:
         - rm -r node_modules
       before_script:
         - cd ..
+        - sudo service mongod stop
         - mongod --dbpath admin.db
       script: 
         - npm test
