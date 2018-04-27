@@ -3,8 +3,12 @@ matrix:
     - language: node_js
       node_js:
         - "8.9.4"
+      services:
+        - mongodb
       before_install:
         - cd admin.api
         - rm -r node_modules
+      before_script:
+        - mongod --dbpath admin.db
       script: 
         - npm test
