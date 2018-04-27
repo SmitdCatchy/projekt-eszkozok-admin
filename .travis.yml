@@ -3,5 +3,7 @@ matrix:
         - language: node_js
             node_js:
                 - "8.9.4"
+            before_script:
+                - npm install
             script: 
-                - "cd admin.api && npm install && npm test"
+                - "cd admin.api && npm test"
