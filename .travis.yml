@@ -10,6 +10,6 @@ matrix:
         - rm -r node_modules
       before_script:
         - cd ..
-        - mongod --dbpath /admin.db
+        - mongod --dbpath admin.db
       script: 
         - npm test
