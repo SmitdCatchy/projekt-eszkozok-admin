@@ -1,11 +1,11 @@
 matrix:
-    include:
-        - language: node_js
-            node_js:
-                - "8.9.4"
-            before_install:
-                - cd admin.api
-            install:
-                - npm install
-            script: 
-                - npm test
+  include:
+    - language: node_js
+      node_js:
+        - "8.9.4"
+      before_install:
+        - cd admin.api
+      install:
+        - npm install
+      script: 
+        - npm test
