@@ -6,7 +6,5 @@ matrix:
       before_install:
         - cd admin.api
         - chmod 0777 ./node_modules/.bin/mocha
-      install:
-        - npm install
       script: 
         - npm test
