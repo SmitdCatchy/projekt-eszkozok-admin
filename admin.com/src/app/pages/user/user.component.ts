@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ListComponent } from '../list/list.component';
+import { UserService } from "../../services/userservice.service";
+import { User } from "../../models/User";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -6,29 +11,45 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  
+  userData: User;
 
-  userData = {
-    name: "Andor",
-    email: "a@a.a",
-    role: "user",
-    flagged: false,
-    flags: {
-      toxic: {
-          value: true,
-          num: 3,
-          byWho: ["a", "b","c"]
-      }
-    },
-    warn: "",
-    ban: new Date()
-  };
+  constructor(private userService: UserService, private router: Router) { }
 
-  constructor() { }
+  warnForm: FormGroup = new FormGroup({
+    warn: new FormControl('', [Validators.required])
+  });
+
+  get warn(): AbstractControl {
+    return this.warnForm.get('warn');
+  }
 
   ngOnInit() {
+    this.userData = this.userService.getSelectedUser();
+    if(null == this.userData) {
+      this.router.navigate(['/list']);
+    }
   }
-  submit(){
-    console.log(this.userData);
+
+  edit(name: String, email: String, role: String): void {
+    this.userService.edit(this.userData._id,  name, email, role);
+  }
+
+  submit() {
+    console.log("Clear");
+  }
+
+  warnBan(date: Date): void {
+    if (this.warn.value.length !== 0 && date !== null) {
+      this.userService.warn(this.userData._id, this.warn.value);
+      this.userService.ban(this.userData._id, date);
+
+    } else if (this.warn.value.length !== 0) {
+      this.userService.warn(this.userData._id, this.warn.value);
+
+    } else if (date !== null) {
+      this.userService.ban(this.userData._id, date);
+    }
   }
 
 }

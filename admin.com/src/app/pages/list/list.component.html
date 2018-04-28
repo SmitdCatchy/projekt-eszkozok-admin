@@ -1,4 +1,12 @@
-<div *ngFor="let user of dummydata" class="usertag" routerLink="/user/{{user.name}}">
+<form [formGroup]="roleForm" novalidate>
+  <input type="text" maxlength="20" class="form-control" formControlName="role" placeholder="Role">
+  <button type="button" class="btn btn-default" (click)="filterRole()">Get Role!</button>
+</form>
+<button type="button" class="btn btn-default" (click)="filterIsBanned()">Get banned!</button>
+<button type="button" class="btn btn-default" (click)="filterIsWarned()">Get warned!</button>
+<button type="button" class="btn btn-default" (click)="refresh()">Refresh!</button>
+<button type="button" class="btn btn-default" (click)="logout()">LOGOUT!</button>
+<div *ngFor="let user of users" class="usertag" (click)="onSelect(user)">
   <h2 class="username {{user.role}}">{{user.name}}</h2>
   <div class="flag {{user.flagged}}"
     [ngClass]="{

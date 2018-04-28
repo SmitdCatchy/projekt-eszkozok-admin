@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-// import {User} from "../../models/User";
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
-// import {UserService} from "../../services/user.service";
-import {Router} from "@angular/router";
+import { User } from "../../models/User";
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from "../../services/userservice.service";
+import { Router } from "@angular/router";
+
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -14,23 +16,30 @@ export class LoginComponent implements OnInit {
   err = "";
 
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   });
 
-  constructor(/*private userService: UserService,*/ private router: Router) {  }
+  constructor(private userService: UserService, private router: Router) {  }
 
   ngOnInit() {
     // if(this.userService.user.role !== "GUEST") this.router.navigate(['/']);
   }
 
   submit() {
-    // this.err = this.userService.login(this.username.value,this.password.value);
-    // if(this.err === "") this.router.navigate(['/']);
+    this.userService.login(this.email.value,this.password.value)
+    .subscribe(result => {
+      if ("http://localhost:3000/" == result.url) {
+        this.router.navigate(['/list'])
+      } else {
+        this.err = "error";
+        this.router.navigate(['/']);
+      }
+    });
   }
 
-  get username(): AbstractControl {
-    return this.loginForm.get('username');
+  get email(): AbstractControl {
+    return this.loginForm.get('email');
   }
 
   get password(): AbstractControl {

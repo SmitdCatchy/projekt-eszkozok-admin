@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../../services/userservice.service";
+import { User } from "../../models/User";
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-list',
@@ -7,80 +12,65 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  roleForm: FormGroup = new FormGroup({
+    role: new FormControl('', [Validators.required]),
+  });
 
-  dummydata = [
-    {
-      name: "Andor",
-      email: "a@a.a",
-      role: "admin",
-      flagged: false,
-      flags: {
-        toxic: {
-            value: false,
-            num: 0,
-            byWho: []
-        }
-      },
-      warn: "",
-      ban: null
-    },
-    {
-      name: "Baltazar",
-      email: "b@b.b",
-      role: "user",
-      flagged: true,
-      flags: [
-        {
-          toxic: {
-              value: true,
-              num: 1,
-              byWho: [1]
-          }
-        }
-      ],
-      warn: "",
-      ban: null
-    },
-    {
-      name: "Catchy",
-      email: "c@c.c",
-      role: "user",
-      flagged: false,
-      flags: [
-        {
-          toxic: {
-              value: false,
-              num: 0,
-              byWho: []
-          }
-        }
-      ],
-      warn: "",
-      ban: true
-    },
-    {
-      name: "David",
-      email: "d@d.cd",
-      role: "moderator",
-      flagged: true,
-      flags: [
-        {
-          toxic: {
-              value: true,
-              num: 2,
-              byWho: [1,2]
-          }
-        }
-      ],
-      warn: "warned",
-      ban: null
-    }
+  constructor(private userService: UserService, private router: Router) {}
 
-  ]
+  users: User[] = [];
 
   ngOnInit() {
-    console.log(this.dummydata);
+    this.loadUsers();
   }
 
+  onSelect(user: User): void {
+    this.userService.setSelectedUser(user);
+    this.router.navigate(['/user/' + user.name]);
+  }
+
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['/']);
+  }
+
+  loadUsers(): void {
+    this.userService.getUsers().subscribe(results => {
+      let temp = results.result;
+      for(let t of temp){
+        this.users.push(new User(
+          t._id, t.name, t.email, t.password, t.role, t.flag, t.warn, t.ban
+        ));
+      }
+    });
+  }
+
+  filterRole(): void {
+    if(this.role.value !== "") {
+      this.users = this.users.filter(
+        user => user.role === this.role.value
+      );
+    }
+  }
+  
+  filterIsBanned(): void {
+    this.users = this.users.filter(
+      user => user.ban !== null
+    );
+  }
+
+  filterIsWarned(): void {
+    this.users = this.users.filter(
+      user => user.warn.length !== 0
+    );
+  }
+
+  refresh(): void {
+    this.users = [];
+    this.loadUsers();
+  }
+
+  get role(): AbstractControl {
+    return this.roleForm.get('role');
+  }
 }
