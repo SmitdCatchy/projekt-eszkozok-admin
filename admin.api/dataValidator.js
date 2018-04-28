@@ -13,9 +13,11 @@ module.exports = {
         if(!data.hasOwnProperty("date")){
             return new this.ReturnMessage(false, "Date is missing!");
         }
+        else if(Date.parse(data.date) <= (new Date()).getTime()){
+            return new this.ReturnMessage(false, "Ban date must be after this day!");
+        }
         else{
-            var today = new Date();
-            return new this.ReturnMessage(data.date > today, "Ban date must be after this day!");
+            return new this.ReturnMessage(true);
         }
     },
 

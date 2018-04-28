@@ -266,7 +266,7 @@ var DatabaseMethods = {
                             callback(new Helpers.DatabaseAnswer(null, "You cannot ban an admin!"));
                         }
                         else{
-                            foundUser.ban = data.date;
+                            foundUser.ban = new Date(data.date);
 
                             //Toroljuk az esetleges flag -eket
                             for(var key in foundUser.flags){

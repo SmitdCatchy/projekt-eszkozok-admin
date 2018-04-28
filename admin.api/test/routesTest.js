@@ -102,12 +102,9 @@ describe("---- Testing routes as admin ----", function() {
     });
 
     it("POST - /api/ban - Should fail to invalid date.", function(done) {
-        var today = new Date(),
-            yesterday = today.setDate(today.getDate() - 1);
-
         loggedInUser
             .post("/api/ban")
-            .send({_id: normalUser2._id, date: yesterday})
+            .send({_id: normalUser2._id, date: "2018.02.26"})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
@@ -123,7 +120,7 @@ describe("---- Testing routes as admin ----", function() {
 
         loggedInUser
             .post("/api/ban")
-            .send({_id: moderatorUser1._id, date: tomorrow})
+            .send({_id: moderatorUser1._id, date: "2118.02.26"})
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .end(function(err, response){
