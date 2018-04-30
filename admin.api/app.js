@@ -68,7 +68,7 @@ app.use(express.static(path.resolve(__dirname + "/../admin.com")));
 
 //CORS sutik kezelesere
 app.use(function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
 	res.header("Access-Control-Allow-Credentials", "true");
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -112,15 +112,14 @@ app.post("/api/logout", function(req, res){
 //--------------------------------------------------
 //Minden keres, ami az /api/... utvonalra erkezik bejelentkezest igenyel
 function isLoggedIn(req, res, next){
-    /*AccessControl.isAuthenticated(req, res, function(isAuthenticated){
+    AccessControl.isAuthenticated(req, res, function(isAuthenticated){
         if(isAuthenticated){
             next();
         }
         else{
             res.send({redirect: "/login", reason: "You need to log in!"});
         }
-    });*/
-	next();
+    });
 }
 
 app.use("/api", isLoggedIn);

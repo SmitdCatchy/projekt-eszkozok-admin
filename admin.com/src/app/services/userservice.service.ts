@@ -31,7 +31,7 @@ export class UserService {
   }
 
   getUsers(): Observable<any> {
-    return this.http.get(Server.routeTo(Routes.USERS))
+    return this.http.get(Server.routeTo(Routes.USERS), {withCredentials: true})
       .map(res => res.json())
     }
 
@@ -39,7 +39,7 @@ export class UserService {
       let send = {
         _id: id
       };
-      return this.http.post(Server.routeTo(Routes.USER), send)
+      return this.http.post(Server.routeTo(Routes.USER), send, {withCredentials: true})
       .map(res => res.json())
     }
 
@@ -48,7 +48,7 @@ export class UserService {
         email: email,
         password: password
       };
-      return this.http.post(Server.routeTo(Routes.LOGIN), send);
+      return this.http.post(Server.routeTo(Routes.LOGIN), send, {withCredentials: true});
     }
 
     logout(): void {
@@ -56,7 +56,7 @@ export class UserService {
         email: "",
         password: ""
       };
-      this.http.post(Server.routeTo(Routes.LOGOUT), send)
+      this.http.post(Server.routeTo(Routes.LOGOUT), send, {withCredentials: true})
       .subscribe(result => console.log(result));
     }
 
@@ -65,7 +65,7 @@ export class UserService {
         _id: id,
         date: date
       };
-      this.http.post(Server.routeTo(Routes.BAN), send)
+      this.http.post(Server.routeTo(Routes.BAN), send, {withCredentials: true})
       .subscribe(result => console.log(result));
     }
 
@@ -74,7 +74,7 @@ export class UserService {
         _id: id,
         message: message
       };
-      this.http.post(Server.routeTo(Routes.WARN), send)
+      this.http.post(Server.routeTo(Routes.WARN), send, {withCredentials: true})
       .subscribe(result => console.log(result));
     }
 
@@ -85,7 +85,7 @@ export class UserService {
         email: email,
         role: role
       };
-      this.http.post(Server.routeTo(Routes.EDIT), send)
+      this.http.post(Server.routeTo(Routes.EDIT), send, {withCredentials: true})
       .subscribe(result => console.log(result));
     }
 
